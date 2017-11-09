@@ -19,18 +19,19 @@ RUN unzip -q sdk-tools-linux.zip -d tools
 RUN rm sdk-tools-linux.zip
 RUN mv tools /usr/local/android-sdk/
 
-
-RUN touch ~/.android/repositories.cfg
+# create an empty repositories config
+RUN touch /usr/local/android-sdk/.android/repositories.cfg
 
 # set path
 ENV ANDROID_HOME /usr/local/android-sdk
 ENV ANDROID_SDK_HOME $ANDROID_HOME
-ENV ANDROID_NDK_HOME /usr/local/android-ndk
 
 ENV PATH=${PATH}:$ANDROID_HOME/tools/bin
 
 RUN sdkmanager --update
 
 RUN sdkmanager "ndk-bundle"
+ENV ANDROID_NDK_HOME /usr/local/android-sdk/ndk-bundle
+
 RUN sdkmanager "cmake;3.6.4111459"
 RUN sdkmanager "lldb;2.3"
