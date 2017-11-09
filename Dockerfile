@@ -20,6 +20,7 @@ RUN rm sdk-tools-linux.zip
 RUN mv tools /usr/local/android-sdk/
 
 # create an empty repositories config
+RUN mkdir -p /usr/local/android-sdk/.android
 RUN touch /usr/local/android-sdk/.android/repositories.cfg
 
 # set path
