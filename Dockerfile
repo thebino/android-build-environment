@@ -42,7 +42,12 @@ RUN echo "e9acab5b5fbb560a72cfaecce8946896ff6aab9d" > "${ANDROID_HOME}/licenses/
 RUN sdkmanager --update
 
 RUN sdkmanager "ndk-bundle"
-ENV ANDROID_NDK_HOME /usr/local/android-sdk/ndk-bundle
-
 RUN sdkmanager "cmake;3.6.4111459"
 RUN sdkmanager "lldb;2.3"
+RUN sdkmanager "tools"
+RUN sdkmanager "platform-tools"
+
+RUN sdkmanager "platforms;android-26"
+RUN sdkmanager "platforms;android-27"
+
+ENV ANDROID_NDK_HOME /usr/local/android-sdk/ndk-bundle
