@@ -51,3 +51,13 @@ RUN sdkmanager "platforms;android-26"
 RUN sdkmanager "platforms;android-27"
 
 ENV ANDROID_NDK_HOME /usr/local/android-sdk/ndk-bundle
+
+
+RUN sdkmanager "build-tools;26.0.1"
+RUN sdkmanager "build-tools;26.0.2"
+RUN sdkmanager "build-tools;26.0.3"
+RUN sdkmanager "build-tools;27.0.0"
+RUN sdkmanager "build-tools;27.0.1"
+RUN sdkmanager "build-tools;27.0.2"
+RUN sdkmanager "build-tools;27.0.3"
+
