@@ -33,6 +33,7 @@ ENV PATH=${PATH}:$ANDROID_HOME/tools/bin
 RUN mkdir "${ANDROID_HOME}/licenses" || true
 RUN echo "601085b94cd77f0b54ff86406957099ebe79c4d6" > "${ANDROID_HOME}/licenses/android-googletv-license"
 RUN echo "d56f5187479451eabf01fb78af6dfcb131a6481e" > "${ANDROID_HOME}/licenses/android-sdk-license"
+RUN echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > "${ANDROID_HOME}/licenses/android-sdk-license"
 RUN echo "84831b9409646a918e30573bab4c9c91346d8abd" > "${ANDROID_HOME}/licenses/android-sdk-preview-license"
 RUN echo "33b6a2b64607f11b759f320ef9dff4ae5c47d97a" > "${ANDROID_HOME}/licenses/google-gdk-license"
 RUN echo "d975f751698a77b662f1254ddbeed3901e976f5a" > "${ANDROID_HOME}/licenses/intel-android-extra-license"
@@ -47,17 +48,16 @@ RUN sdkmanager "lldb;2.3"
 RUN sdkmanager "tools"
 RUN sdkmanager "platform-tools"
 
-RUN sdkmanager "platforms;android-26"
 RUN sdkmanager "platforms;android-27"
+RUN sdkmanager "platforms;android-28"
 
 ENV ANDROID_NDK_HOME /usr/local/android-sdk/ndk-bundle
 
 
-RUN sdkmanager "build-tools;26.0.1"
-RUN sdkmanager "build-tools;26.0.2"
-RUN sdkmanager "build-tools;26.0.3"
-RUN sdkmanager "build-tools;27.0.0"
 RUN sdkmanager "build-tools;27.0.1"
 RUN sdkmanager "build-tools;27.0.2"
 RUN sdkmanager "build-tools;27.0.3"
+RUN sdkmanager "build-tools;28.0.2"
+RUN sdkmanager "build-tools;28.0.3"
+RUN sdkmanager "build-tools;29.0.0-rc1"
 
