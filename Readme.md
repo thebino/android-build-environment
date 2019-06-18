@@ -7,23 +7,17 @@ This Android build environment with ndk toolchain for cross compiling.
 
 
 ### Contains
-:white_check_mark: build-tools 28.0.0, 28.0.1, 28.0.2, 28.0.3, 29.0.0
-:white_check_mark: cmake 3.6.4111459, 3.10.2.4988404
-:white_check_mark: lldb 2.0, 2.1, 2.2, 2.3, 3.0, 3.1
-:white_check_mark: ndk-bundle and ndk 20.0.5594570
-:white_check_mark: platforms android-28, android-29
+:white_check_mark: build-tools 28.0.0, 28.0.1, 28.0.2, 28.0.3, 29.0.0  
+:white_check_mark: cmake 3.6.4111459, 3.10.2.4988404  
+:white_check_mark: lldb 2.0, 2.1, 2.2, 2.3, 3.0, 3.1  
+:white_check_mark: ndk-bundle and ndk 20.0.5594570  
+:white_check_mark: platforms android-28, android-29  
 
 ## Usage example
 
 ```
-docker run -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts
+docker run --rm -v ${PWD}:/root thebino/android-build-environment /bin/bash -c "cd && ~/gradlew :app:assemble"
 ```
-
-NOTE: read below the _build executors_ part for the role of the `50000` port mapping.
-
-This will store the workspace in /var/jenkins_home. All Jenkins data lives in there - including plugins and configuration.
-You will probably want to make that an explicit volume so you can manage it and attach to another container for upgrades :
-
 
 ## Release History
 * 0.0.6
@@ -65,43 +59,29 @@ Distributed under the Attribution 4.0 International (CC BY 4.0) license. See ``L
 
 ## Development setup
 
-To install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
-
-get license hash from $ANDROID_HOME/licenses/*
+To install development dependencies, use sdkmanager inside the docker image. Grep license hashes from your `$ANDROID_HOME/licenses` and update Dockerfile
 
 build the image
 ```sh
-docker build -t android-build-environment:0.0.5 .
+docker build -t android-build-environment:0.0.6 .
 ```
-
-
 
 tag the version
 ```
-docker tag android-build-environment:0.0.5 thebino/android-build-environment:0.0.5
+docker tag android-build-environment:0.0.6 thebino/android-build-environment:0.0.6
 ```
 
-login to docker
+push image to docker (login needed)
 ```
-docker login
-```
-
-push image to docker
-```
-docker push thebino/android-build-environment:0.0.5
+docker push thebino/android-build-environment:0.0.6
 ```
 
 tag latest to last version
 ```
-docker tag android-build-environment:0.0.5 thebino/android-build-environment:latest
+docker tag android-build-environment:0.0.6 thebino/android-build-environment:latest
 ```
 
 push lates to docker hub
 ```
 docker push thebino/android-build-environment:latest
-```
-run the image localy for tests  (mount /chessolution into /root)
-```
-docker run -t -i android-build-environment:0.0.5
-docker run -t -i -v /Users/bino/workspace/android/chessolution/:/root/ android-build-environment:0.0.5
 ```
