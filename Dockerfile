@@ -60,6 +60,8 @@ RUN sdkmanager "ndk;22.1.7171670"
 
 # platform
 RUN sdkmanager "platform-tools"
+RUN sdkmanager "platforms;android-29"
+RUN sdkmanager "platforms;android-30"
 RUN sdkmanager "platforms;android-31"
 
 # tools

@@ -9,8 +9,6 @@
 - ndk-bundle to 22.1.7171670
 
 ### Removed
-- android-29 image
-- android-30 image
 - build-tools 29.0.0, 29.0.1, 29.0.2, 29.0.3, 30.0.0, 30.0.1, 30.0.2, 30.0.3, 
 
 ### Removed
