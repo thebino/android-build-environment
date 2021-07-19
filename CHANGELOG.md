@@ -2,7 +2,7 @@
 ### Added
 - android-31 image
 - build-tools 31.0.0,
-- cmake 3.10.2.4988404, 3.18.1
+- cmake 3.6.4111459, 3.10.2.4988404, 3.18.1
 
 ### Changed
 - `ANDROID_NDK_HOME` as replacement for `ANDROID_NDK_ROOT`

@@ -39,7 +39,7 @@ RUN mkdir -p /opt/android-sdk/.android
 RUN touch /opt/android-sdk/.android/repositories.cfg
 
 # set path
-ENV ANDROID_SDK_HOME /opt/android-sdk/
+ENV ANDROID_SDK_HOME /opt/android-sdk
 ENV PATH=${PATH}:$ANDROID_SDK_HOME/tools/bin
 ENV PATH=${PATH}:$ANDROID_SDK_HOME/cmdline-tools/latest/bin/
 
@@ -67,4 +67,5 @@ RUN sdkmanager "platforms;android-31"
 # tools
 RUN sdkmanager "tools"
 
-ENV ANDROID_NDK_HOME /opt/android-sdk/ndk-bundle
+ENV ANDROID_NDK_HOME=/opt/android-sdk/ndk-bundle
+ENV TOOLCHAIN=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/
