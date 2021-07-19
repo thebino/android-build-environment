@@ -19,7 +19,7 @@ RUN apt-get -qq install -y wget unzip git \
 	pkg-config \
     rsync \
 	software-properties-common \
-    texinfo texi2html \
+    tar texinfo texi2html \
     unzip \
     wget \
     zip zlib1g-dev
