@@ -5,12 +5,12 @@ LABEL authors="Stürmer, Benjamin"
 MAINTAINER Stürmer, Benjamin <webmaster@stuermer-benjamin.de>
 
 RUN apt-get -qq update
-RUN apt-get -qq install -y wget unzip git \
-	autoconf automake \
+RUN apt-get -qq install -y \
+	autoconf automake autopoint \
     build-essential bzip2 \
     curl \
     dnsutils \
-    gcc groff \
+    gcc git gettext groff \
     help2man \
 	lib32stdc++6 lib32z1 lib32z1-dev libc6-dev libtool libgmp-dev libmpc-dev libmpfr-dev libxslt-dev libxml2-dev \
 	m4 make \
