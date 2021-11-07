@@ -54,3 +54,8 @@ RUN sdkmanager "platform-tools" "platforms;android-31" "tools"
 ENV ANDROID_NDK_HOME=/opt/android-sdk/ndk-bundle
 ENV TOOLCHAIN=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64
 ENV SYSROOT=$TOOLCHAIN/sysroot
+ENV AR=$TOOLCHAIN/bin/llvm-ar
+ENV LD=$TOOLCHAIN/bin/ld
+ENV RANLIB=$TOOLCHAIN/bin/llvm-ranlib
+ENV STRIP=$TOOLCHAIN/bin/llvm-strip
+
