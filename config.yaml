@@ -1,0 +1,27 @@
+schemaVersion: '2.0.0'
+fileExistenceTests:
+  - name: 'sdkmanager'
+    path: '/opt/android-sdk/cmdline-tools/latest/bin/sdkmanager'
+    shouldExist: true
+    uid: 1000
+    gid: 1000
+    isExecutableBy: 'group'
+  - name: 'Android SDK folder'
+    path: '/opt/android-sdk'
+    shouldExist: true
+    uid: 1000
+    gid: 1000
+    isExecutableBy: 'group'
+  - name: 'Android NDK folder'
+    path: '/opt/android-sdk/ndk-bundle'
+    shouldExist: true
+    uid: 1000
+    gid: 1000
+    isExecutableBy: 'group'
+fileContentTests:
+  - name: 'Cache folder config'
+    path: '/home/user/.bazelrc'
+    expectedContents: ['.*build --repository_cache=/bazel/cache.*']
+globalEnvVars:
+  - key: "ANDROID_SDK_HOME"
+    value: "/opt/android-sdk"
