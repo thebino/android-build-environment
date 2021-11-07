@@ -23,12 +23,6 @@ jobs:
       - name: Build the tagged Docker image
         run: docker build . --file Dockerfile --tag thebino/android-build-environment:${{steps.vars.outputs.tag}}
 
-      - name: Download docker container-structure-test tool
-        run: curl -LO https://storage.googleapis.com/container-structure-test/latest/container-structure-test-linux-amd64 && chmod +x container-structure-test-linux-amd64 && sudo mv container-structure-test-linux-amd64 /usr/local/bin/container-structure-test
-
-      - name: Test the Docker image
-        run: /usr/local/bin/container-structure-test test --image thebino/android-build-environment:${{steps.vars.outputs.tag}} --config config.yaml
-
       - name: Push the tagged Docker image
         run: docker push thebino/android-build-environment:${{steps.vars.outputs.tag}}
 
