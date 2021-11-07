@@ -4,8 +4,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 LABEL authors="Stürmer, Benjamin"
 MAINTAINER Stürmer, Benjamin <webmaster@stuermer-benjamin.de>
 
-RUN apt-get -qq update
-RUN apt-get -qq install -y \
+# update, install packages and clear apt cache to reduce image size
+RUN apt-get update && apt-get -qq install -y --no-install-recommends \
 	autoconf automake autopoint \
     build-essential bzip2 \
     curl \
@@ -22,21 +22,17 @@ RUN apt-get -qq install -y \
     tar texinfo texi2html \
     unzip \
     wget \
-    zip zlib1g-dev
+    zip zlib1g-dev && rm -rf /var/lib/apt/lists/*
 
 # download and install sdkmanager
-RUN wget -q https://dl.google.com/android/repository/commandlinetools-linux-7302050_latest.zip -O commandlinetools-linux-latest.zip
-RUN mkdir -p /opt/android-sdk/cmdline-tools/
-RUN unzip -q commandlinetools-linux-latest.zip
-RUN mv cmdline-tools /opt/android-sdk/cmdline-tools/latest
-RUN rm commandlinetools-linux-latest.zip
+RUN wget -q https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip -O commandlinetools-linux-latest.zip
+RUN mkdir -p /opt/android-sdk/cmdline-tools/ && unzip -q commandlinetools-linux-latest.zip -d /opt/android-sdk/cmdline-tools/ && mv /opt/android-sdk/cmdline-tools/cmdline-tools/ /opt/android-sdk/cmdline-tools/latest/
 
 # accept licenses
 RUN yes | /opt/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses
 
 # create an empty repositories config
-RUN mkdir -p /opt/android-sdk/.android
-RUN touch /opt/android-sdk/.android/repositories.cfg
+RUN mkdir -p /opt/android-sdk/.android && touch /opt/android-sdk/.android/repositories.cfg
 
 # set path
 ENV ANDROID_SDK_HOME /opt/android-sdk
@@ -49,23 +45,12 @@ RUN sdkmanager --update
 # build-tools
 RUN sdkmanager "build-tools;31.0.0"
 
-# cmake
-RUN sdkmanager "cmake;3.18.1"
-RUN sdkmanager "cmake;3.10.2.4988404"
-RUN sdkmanager "cmake;3.6.4111459"
+# cmake & ndk
+RUN sdkmanager "cmake;3.10.2.4988404" "ndk-bundle"
 
-# ndk
-RUN sdkmanager "ndk-bundle"
-RUN sdkmanager "ndk;22.1.7171670"
-
-# platform
-RUN sdkmanager "platform-tools"
-RUN sdkmanager "platforms;android-29"
-RUN sdkmanager "platforms;android-30"
-RUN sdkmanager "platforms;android-31"
-
-# tools
-RUN sdkmanager "tools"
+# platform & tools
+RUN sdkmanager "platform-tools" "platforms;android-31" "tools"
 
 ENV ANDROID_NDK_HOME=/opt/android-sdk/ndk-bundle
-ENV TOOLCHAIN=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/
+ENV TOOLCHAIN=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64
+ENV SYSROOT=$TOOLCHAIN/sysroot
